@@ -118,6 +118,7 @@ public class TestCycleCrossover {
     public void test05() {
         ArrayList<Tour> child = crossover.doCrossover(parent01, parent02);
         Assertions.assertNotNull(child.get(0));
+        Assertions.assertNotNull(child.get(1));
     }
 
     @Test
@@ -125,6 +126,7 @@ public class TestCycleCrossover {
     public void test06() {
         ArrayList<Tour> child = crossover.doCrossover(parent01, parent02);
         Assertions.assertEquals(child.get(0).getSize(), parent01.getSize());
+        Assertions.assertEquals(child.get(1).getSize(), parent01.getSize());
     }
 
     @Test
@@ -132,10 +134,14 @@ public class TestCycleCrossover {
     public void test07() {
         ArrayList<Tour> child = crossover.doCrossover(parent01, parent02);
         ArrayList<City> child01 = child.get(0).getCities();
+        ArrayList<City> child02 = child.get(1).getCities();
 
         // https://stackoverflow.com/a/562906
-        Set<City> set = new HashSet<>(child01);
-        Assertions.assertEquals(set.size(), child01.size());
+        Set<City> set01 = new HashSet<>(child01);
+        Assertions.assertEquals(set01.size(), child01.size());
+
+        Set<City> set02 = new HashSet<>(child02);
+        Assertions.assertEquals(set02.size(), child02.size());
     }
 
     @Test
@@ -143,11 +149,16 @@ public class TestCycleCrossover {
     public void test08() {
         ArrayList<Tour> child = crossover.doCrossover(parent01, parent02);
         ArrayList<City> child01 = child.get(0).getCities();
+        ArrayList<City> child02 = child.get(1).getCities();
 
         // https://stackoverflow.com/a/2784576
         child01.sort(Comparator.comparing(City::getId));
         for (int i = 1; i <= 280; i++) {
             Assertions.assertEquals(i, child01.get(i-1).getId());
+        }
+        child02.sort(Comparator.comparing(City::getId));
+        for (int i = 1; i <= 280; i++) {
+            Assertions.assertEquals(i, child02.get(i-1).getId());
         }
     }
 
@@ -156,8 +167,10 @@ public class TestCycleCrossover {
     public void test09() {
         ArrayList<Tour> child = crossover.doCrossover(parent01, parent02);
         ArrayList<City> child01 = child.get(0).getCities();
+        ArrayList<City> child02 = child.get(1).getCities();
 
         Assertions.assertNotEquals(child01, parent01.getCities());
+        Assertions.assertNotEquals(child02, parent01.getCities());
     }
 
     @Test
@@ -165,7 +178,9 @@ public class TestCycleCrossover {
     public void test10() {
         ArrayList<Tour> child = crossover.doCrossover(parent01, parent02);
         ArrayList<City> child01 = child.get(0).getCities();
+        ArrayList<City> child02 = child.get(1).getCities();
 
         Assertions.assertNotEquals(child01, parent02.getCities());
+        Assertions.assertNotEquals(child02, parent02.getCities());
     }
 }
