@@ -32,6 +32,8 @@ public class CycleCrossover extends Crossover {
         Tour offspring = new Tour();
         parent01.getCities().forEach(c -> offspring.addCity(null));
 
+        // https://www.rubicite.com/Tutorials/GeneticAlgorithms/CrossoverOperators/CycleCrossoverOperator.aspx#:~:text=Cycle%201%3A%20We%20start%20with,we%20drop%20down%20to%209.
+        // https://uwaterloo.ca/scholar/sites/ca.scholar/files/ahilal/files/lecture-6-1.pdf
         // start by taking the first element of parent01
         // "i = 1" - startindex in genetic_algorithms_crossover_operators_01.pdf
         // ".. choose the first element of the offspring equal to be either the first element of the first parent or the first element of the second parent" - genetic_algorithms_crossover_operators_02.pdf
